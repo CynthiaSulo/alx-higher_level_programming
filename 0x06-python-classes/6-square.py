@@ -1,80 +1,86 @@
 #!/usr/bin/python3
-"""
-This module illustrates the use of the Square class
-defined in the 6-square module.
-It calculates and displays the area of the square
-using the private instance attribute: size
-It retrieves the private instance attribute: size
-and sets it to a different value.
-It creates a public instance method my_print()
-which prints to the stdout, a square made of #.
-It uses another private instance attribute:
-position to print # to stdout.
-"""
+"""A module containing a square"""
 
 
 class Square:
-    """This class defines a square using private instance attribute: size."""
+    """A square class"""
+
     def __init__(self, size=0, position=(0, 0)):
-        """This function performs the instantiation of
-        private instance attribute: size."""
-        self.__size = size
-        self.__position = position
+        """initializes square
+        Args:
+            size (int): size of the square
+            position (int, int): position of the argument
+        """
+
+        self.size = size
+        self.position = position
 
     @property
     def size(self):
-        """This function retrieves the private instance attribute: size."""
+        """Gets value of size
+        Returns:
+            size (int)
+        """
+
         return self.__size
 
     @size.setter
     def size(self, value):
-        """This function sets the private instance attribute:
-            size to a different value."""
-        try:
-            self.__size = value
-            if not isinstance(value, int):
-                raise TypeError("size must be an integer")
-            if value < 0:
-                raise ValueError("size must be >= 0")
-        except TypeError:
-            raise
-        except ValueError:
-            raise
+        """ Change the value of size
+        Args:
+            value (int): new value of size
+        """
+
+        if type(value) != int:
+            raise TypeError("size must be an integer")
+        elif value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
+
+    def area(self):
+        """ Calculates the area of a square
+        Returns:
+            area
+        """
+
+        return self.__size * self.__size
 
     @property
     def position(self):
-        """This function retrieves the private instance attribute: position."""
+        """gets the position"""
+
         return self.__position
 
     @position.setter
     def position(self, value):
-        """This function sets the private instance attribute: size
-        to a different value."""
-        try:
-            self.__position = value
-            if not isinstance(value, tuple):
-                raise TypeError("position must be a tuple of 2\
-                        positive integers")
-            if not isinstance(value[0], int) or not isinstance(value[1], int):
-                raise TypeError("position must be a tuple of 2\
-                        positive integers")
-        except TypeError:
-            raise
+        """change the value of poaition
+        Args:
+            value (int, int): the new position
+        """
+
+        if type(value) != tuple or len(value) != 2:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if type(value[0]) != int or type(value[1]) != int:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if value[0] < 0 or value[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = value
 
     def area(self):
-        """This function calculates the area of the square
-        using private instance attribute: size."""
-        return self.__size * self.__size
+        a = self.__size * self.__size
+        return a
 
     def my_print(self):
-        """This function prints to the stdout, a square
-        made of #."""
+        """Print a square"""
+
         if self.__size == 0:
             print("")
-            return
-        for i in range(self.__size):
-            if self.__position[0] > 0:
-                print(" " * self.__position[0], end="")
-                for j in range(self.__size):
+        else:
+            for line in range(0, self.__position[1]):
+                print()
+            for i in range(0, self.__size):
+                for space in range(0, self.__position[0]):
+                    print(" ", end="")
+                for j in range(0, self.__size):
                     print("#", end="")
-                print("")
+                print()
