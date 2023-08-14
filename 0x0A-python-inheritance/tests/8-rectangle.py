@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+"""
+Module contains an instance of the BaseGeometry class
+and tries to print its area, otherwise raises an
+exception message.
+"""
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+
+class Rectangle(BaseGeometry):
+    """
+    This class inherits from BaseGeometry.
+    Performs instantiation of private instance attributes:
+    width and height.
+    """
+    def __init__(self, width, height):
+        """
+        Initializes private instance attributes: width and height.
+        """
+        self.integer_validator("width", width)
+        self.__width = width
+        self.integer_validator("height", height)
+        self.__height = height
